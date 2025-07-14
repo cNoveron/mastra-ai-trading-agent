@@ -47,7 +47,8 @@ export const getCryptoPrice = createTool({
   id: "Get crypto price by id",
   inputSchema: z.object({ id: z.string() }),
   description: "Get crypto price by id",
-  execute: async ({ context: { id } }) => {
+  execute: async ({ context }) => {
+    const { id } = context;
     console.log("getCryptoPrice for", id);
     const coinListUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}`;
 
@@ -74,7 +75,8 @@ export const getHistoricalCryptoPrices = createTool({
   id: "Get historical crypto prices for use in a chart",
   inputSchema: z.object({ id: z.string(), days: z.number() }),
   description: "Get historical crypto prices for use in a chart",
-  execute: async ({ context: { id, days } }) => {
+  execute: async ({ context }) => {
+    const { id, days } = context;
     console.log("getHistoricalCryptoPrices for", id);
     const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
 
